@@ -1,0 +1,26 @@
+#
+# Example demo actions pipeline
+#
+
+name: phx-actions-demo
+run-name: ${{ github.actor }} is testing out workflows
+on:
+  - push
+jobs:
+  demo-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print trigger event
+        run: 'echo "Job was triggered by a ${{ github.event_name }} event!"'
+
+      - name: Print runner details
+        run: echo "This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+
+      - name: Print branch and repo details
+        run: echo "Branch is ${{ github.ref }} and repository name is ${{ github.repository }}."
+      
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: List repo files
+        run: ls ${{ github.workspace }}
